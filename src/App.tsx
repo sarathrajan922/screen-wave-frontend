@@ -1,7 +1,7 @@
 
 import "./App.css";
 
-import JoinButton from "./components/joinButton";
+import JoinButton from "./components/createButton";
 
 function App() {
   return (
