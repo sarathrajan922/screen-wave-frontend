@@ -1,22 +1,24 @@
 import React, { useContext, useEffect } from "react";
 import { useParams } from 'react-router-dom'
 import { RoomContext } from "../context/RoomContext";
+import VideoPlayer from "../components/videoPlayer";
 
 
 const Room:React.FC = ()=>{
 
     const {id} = useParams();
 
-    const {ws} = useContext(RoomContext);
+    const {ws ,me, stream} = useContext(RoomContext);
 
     useEffect(()=>{
-        ws.emit('join-room', { roomId : id})
-    },[id])
+      if(me)  ws.emit('join-room', { roomId : id , peerId: me._id})
+    },[id,me, ws])
 
 
     return (
         <div>
             Room Id : {id}
+            <VideoPlayer stream={stream}/>
         </div>
     )
 }
